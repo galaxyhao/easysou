@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>全易搜</title>
+<link rel="shortcut icon" href="images/icon.png">
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+<style>
+div.input-group{position: relative; top: 50px;bottom: 20px;}
+div.check{position: relative;top: 50px;bottom: 20px;}
+body{background-color: black;}
+</style>
+</head>
+<script src="js/segment.min.js"></script> 
+<script src="js/d3-ease.v0.6.js"></script>                  
+<script src="js/letters.js"></script>
+<body>
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#" style="font-size:20px;font-weight:bolder">全易搜</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <a  class="navbar-text navbar-right" href="aboutme.html" style="font-size:16px">关于我们</a>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+<div class="text  col-md-offset-3">AllEasySou</div>
+<script type="text/javascript">
+  var el = document.querySelector('.text'); 
+  
+//每个选项可以定义为单个也可以定义为数组 
+var options = { 
+    size: 180,         // 字体大小，决定文字的高度，px 
+    weight: 5,         // 粗体，px 
+    rounded: false,    // 字母结尾圆角 
+    color: ['#f90','#5F6062'],  // 字体颜色 
+    duration: 1,       // 每个字母的动画展示时长 (seconds) 
+    delay: [0, 0.1],  // 每个字母间的动画延时 
+    fade: 1,         // 渐显效果的时长(seconds) 
+    easing: d3_ease.easeCubicInOut.ease,   // 缓冲动画效果 
+    individualDelays: false     // 默认false，如果设置成false，则动画效果会从左到右过度展示，如果是true，字母动画效果是同步展示 
+}; 
+  
+var myText = new Letters(el, options); 
+ 
+myText.show();
+</script>
+
+<!--搜索框-->
+<div class="container-fluid">
+	<form action="search.php" method="get">
+    <div class="col-md-6 col-md-offset-3">
+    <div class="input-group">
+      <input type="text" class="form-control" placeholder="搜一下" name="key" style="background-color: black;">
+      <span class="input-group-btn">
+        <button class="btn btn-default " type="submit" onclick="search()" style="background-color: black;"><strong style="color:gray">搜索一下</strong></button>
+      </span>
+    </div><!-- /input-group -->
+    </div><!-- /.col-lg-6 -->
+    <br><br><br>
+
+	 <div class="col-sm-4 col-sm-offset-4 check" align="center" >
+			<input type="radio" name="radio" value="one" checked>
+      <span style="font-size: 22px; "><strong style="color:gray">单搜</strong></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="radio" name="radio" value="two">
+      <span style="font-size: 22px; font-color:blue;"><strong style="color:gray">双搜</strong></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="radio" name="radio" value="three"> 
+      <span style="font-size: 22px; "><strong style="color:gray">三搜</strong></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="radio" name="radio" value="four">
+      <span style="font-size: 22px; "><strong style="color:gray">四搜</strong></span>
+      </div>     
+	</form>
+  </div>
+<script>
+  function search()
+  {
+
+    var name = document.getElementsByName("radio");
+    for(var i=0;i<name.length;i++)
+    {
+      if (name[i].checked) 
+      {
+        var num = name[i].value;
+      }
+    }
+    if(num == "one") 
+      document.getElementsByTagName("form")[0].action = "search1.php";
+    else if(num == "two")
+      document.getElementsByTagName("form")[0].action = "search2.php";
+    else if(num == "three")
+      document.getElementsByTagName("form")[0].action = "search3.php";
+    else if(num == "four")
+      document.getElementsByTagName("form")[0].action = "search4.php";
+  }
+</script>
+
+<script type="text/javascript">
+    window.onload = function(){
+      var config = {
+        vx: 4,
+        vy:  4,
+        height: 2,
+        width: 2,
+        count: 100,
+        color: "121, 162, 185",
+        stroke: "130,255,255",
+        dist: 6000,
+        e_dist: 20000,
+        max_conn: 10
+      }
+      CanvasParticle(config);
+    }
+  </script>
+  <script type="text/javascript" src="js/canvas-particle.js"></script>
+
+<script src="http://apps.bdimg.com/libs/jquery/2.0.0/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<html>
+<head>
+<script src="clienthint.js"></script> 
+</head>
+
+<body>
+<script type="text/javascript">
+var xmlHttp;
+var src;
+function showHint(str)
+{
+if (str.length==0)
+  { 
+  document.getElementById("txtHint").innerHTML=""
+  return
+  }
+xmlHttp=GetXmlHttpObject()
+if (xmlHttp==null)
+  {
+  alert ("Browser does not support HTTP Request")
+  return
+  } 
+var url="test.php"
+url=url+"?q=baidu"
+url=url+"&sid="+ Math.random()
+xmlHttp.onreadystatechange = stateChanged;
+xmlHttp.open("GET",url,true)
+xmlHttp.send(null)
+} 
+
+function stateChanged() 
+{ 
+if (xmlHttp.readyState==4 || xmlHttp.readyState=="complete")
+ { 
+ src=xmlHttp.responseText;
+ } 
+}
+
+function GetXmlHttpObject()
+{
+var xmlHttp=null;
+try
+ {
+ // Firefox, Opera 8.0+, Safari
+ xmlHttp=new XMLHttpRequest();
+ }
+catch (e)
+ {
+ // Internet Explorer
+ try
+  {
+  xmlHttp=new ActiveXObject("Msxml2.XMLHTTP");
+  }
+ catch (e)
+  {
+  xmlHttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+ }
+return xmlHttp;
+}
+alert(src);
+</script>
+<form> 
+First Name:
+<input type="text" id="txt1"
+onkeyup="showHint(this.value)">
+</form>
+
+<p>Suggestions: <span id="txtHint"></span></p>
+
+</body>
+</html>
